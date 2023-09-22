@@ -14,4 +14,18 @@ def lexer(text):
         else:
             temp = temp + x
         
-    return tokens
+    for x in tokens:
+        if type(x) is list:
+            types.append("list")
+        elif type(x) is str:
+            if x == "(":
+                types.append("openPar")
+            elif x == ")":
+                types.append("closePar")
+            else:
+                types.append("string")
+        elif type(x) is int:
+            types.append("integer")
+        elif type(x) is float:
+            types.append("float")
+    return [tokens, types]
