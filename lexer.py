@@ -1,13 +1,29 @@
+exeptions = ["(", ")"]
+keywords = ["hello"]
+
 def lexer(text):
     tokens = []
     types = []
     temp = ""
-    exeptions = ["(", ")"]
     for x in text:
         if x == " ":
+            try:
+               temp = int(temp)
+            except ValueError:
+                try:
+                    temp = float(temp)
+                except ValueError:
+                    pass
             tokens.append(temp)
             temp = ""
         elif x in exeptions:
+            try:
+               temp = int(temp)
+            except ValueError:
+                try:
+                    temp = float(temp)
+                except ValueError:
+                    pass
             tokens.append(temp)
             tokens.append(x)
             temp = ""
@@ -22,6 +38,8 @@ def lexer(text):
                 types.append("openPar")
             elif x == ")":
                 types.append("closePar")
+            elif x in keywords:
+                types.append("keyword")
             else:
                 types.append("string")
         elif type(x) is int:
