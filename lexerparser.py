@@ -131,6 +131,31 @@ def variableValue(variables, value):
     else:
         return value
 
+def numericalOp(input, variables):
+    add = input.split("+", 1)
+    sub = input.split("-", 1)
+    mul = input.split("*", 1)
+    div = input.split("/", 1)
+    if len(add) == 2:
+        op = "add"
+        split = add
+    elif len(sub) == 2:
+        op = "sub"
+        split = sub
+    elif len(mul) == 2:
+        op = "mul"
+        split = mul
+    elif len(div) == 2:
+        op = "div"
+        split = div
+    else:
+        op = ""
+    if op != "":
+        command = op + " " + str(variableValue(variables, split[0])) + " " + str(variableValue(variables, split[1]))
+    else:
+        command = ""
+    return command
+
 def compile(parsed):
     parsedTokens = parsed
     variables = {}
@@ -142,7 +167,12 @@ def compile(parsed):
         if temp2 | temp1:
             variables[x[1]] = len(variables) + 1
             ramLoc = variables[x[1]]
-            compilied += "mov $" + str(ramLoc) + " " + str(variableValue(variables, x[2])) + "\n"
+            xyz = numericalOp(x[2], variables)
+            if xyz == x[2]:
+                compilied += "mov $" + str(ramLoc) + " " + str(variableValue(variables, x[2])) + "\n"
+            else:
+                compilied += xyz + "\n"
+                compilied += "mov $" + str(ramLoc) + " " + "@a" + "\n"
         elif x[0] == "printc":
             compilied += "mov @a " + str(variableValue(variables, x[1])) + "\nint 0x3\n"
         elif x[0] == "printa":
