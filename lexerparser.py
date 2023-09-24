@@ -1,5 +1,5 @@
 exeptions = ["(", ")", "'", '"', "=", ";"]
-keywords = ["int", "=", "func"]
+keywords = ["int", "=", "func", "printc", "printa"]
 
 def lexer(text):
     tokens = []
@@ -124,3 +124,18 @@ def parser(lexer):
             countedFunction.append(x)
     parsedTokens["_main"] = newFunction
     return parsedTokens
+
+def compile(parsed):
+    parsedTokens = parsed
+    variables = {}
+    compilied = ""
+    for x in parsedTokens["_main"]:
+        if x[0] == "int":
+            variables[x[1]] = len(variables) + 1
+            ramLoc = variables[x[1]]
+            compilied += "mov $" + str(ramLoc) + " " + str(x[2]) + "\n"
+        if x[0] == "printc":
+            compilied += "mov @a " + str(x[1]) + "\nint 0x3\n"
+        if x[0] == "printa":
+            compilied += "int 0x4\n"
+    return compilied
