@@ -1,5 +1,5 @@
-exeptions = ["(", ")", "'", '"', "="]
-keywords = ["int", "="]
+exeptions = ["(", ")", "'", '"', "=", ";"]
+keywords = ["int", "=", "func"]
 
 def lexer(text):
     tokens = []
@@ -38,6 +38,8 @@ def lexer(text):
                 types.append("openPar")
             elif x == ")":
                 types.append("closePar")
+            elif x == ";":
+                types.append("endLine")
             elif x in keywords:
                 types.append("keyword")
             else:
@@ -46,6 +48,14 @@ def lexer(text):
             types.append("integer")
         elif type(x) is float:
             types.append("float")
+    
+    i = 0
+    while i != len(tokens):
+        if tokens[i] == "":
+            del tokens[i]
+            del types[i]
+        else:
+            i += 1
     return [tokens, types]
 
 # def parser(lexer):
@@ -72,3 +82,23 @@ def lexer(text):
 #                 pass
 #         i += 1
 #     return [parsedTokens, parsedTypes]
+
+def parser(lexer):
+    tokens = lexer[0]
+    types = lexer[1]
+    parsedTokens = {}
+    parsedTypes = {}
+    i = 0
+    while i != len(tokens):
+        temp1 = types[i] == "keyword"
+        temp2 = tokens[i] == "func"
+        if temp1 & temp2:
+            funcName = tokens[i + 1]
+            parsedTokens[funcName] = []
+            i += 2
+            print(i)
+            while tokens[i] != "}":
+                parsedTokens[funcName].append(tokens[i])
+                i += 1
+        i += 1
+    return parsedTokens
