@@ -1,6 +1,6 @@
 func _main {
     char hello b;
-    var hello2 1*5;
+    var hello2 hello;
     printc hello2;
     printa;
 };
