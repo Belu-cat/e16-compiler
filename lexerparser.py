@@ -127,7 +127,7 @@ def parser(lexer):
 
 def variableValue(variables, value):
     if str(value) in variables:
-        return variables[str(value)]
+        return "$" + str(variables[str(value)])
     else:
         return value
 
@@ -142,7 +142,7 @@ def compile(parsed):
         if temp2 | temp1:
             variables[x[1]] = len(variables) + 1
             ramLoc = variables[x[1]]
-            compilied += "mov $" + str(ramLoc) + " " + str(x[2]) + "\n"
+            compilied += "mov $" + str(ramLoc) + " " + str(variableValue(variables, x[2])) + "\n"
         elif x[0] == "printc":
             compilied += "mov @a " + str(variableValue(variables, x[1])) + "\nint 0x3\n"
         elif x[0] == "printa":
