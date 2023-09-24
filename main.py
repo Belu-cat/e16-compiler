@@ -3,6 +3,9 @@ import sys
 if len(sys.argv) > 1:
     xyz = sys.argv[1] + ".e16"
     zyx = sys.argv[1] + ".txt"
+elif len(sys.argv) > 2:
+    xyz = sys.argv[1] + ".e16"
+    zyx = sys.argv[2] + ".txt"
 else:
     xyz = "input.e16"
     zyx = "compilied.txt"
