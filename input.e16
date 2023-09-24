@@ -1,4 +1,5 @@
 func _main {
-printc 2;
+char hello b;
+printc hello;
 printa:
 };

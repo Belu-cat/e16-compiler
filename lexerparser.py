@@ -1,5 +1,5 @@
 exeptions = ["(", ")", "'", '"', "=", ";", "{", "}"]
-keywords = ["int", "=", "func", "printc", "printa"]
+keywords = ["int", "=", "func", "printc", "printa", "var", "char"]
 
 def lexer(text):
     tokens = []
@@ -125,17 +125,30 @@ def parser(lexer):
     parsedTokens["_main"] = newFunction
     return parsedTokens
 
+def variableValue(variables, value):
+    if str(value) in variables:
+        return variables[str(value)]
+    else:
+        return value
+
 def compile(parsed):
     parsedTokens = parsed
     variables = {}
     compilied = ""
+    chartable = ["return", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "`", "~", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "{", "]", "}", "\\", "|", ";", ":", "'", "\"", ",", "<", ".", ">", "/", "?"]
     for x in parsedTokens["_main"]:
-        if x[0] == "int":
+        temp1 = x[0] == "var"
+        temp2 = x[0] == "int"
+        if temp2 | temp1:
             variables[x[1]] = len(variables) + 1
             ramLoc = variables[x[1]]
             compilied += "mov $" + str(ramLoc) + " " + str(x[2]) + "\n"
-        if x[0] == "printc":
-            compilied += "mov @a " + str(x[1]) + "\nint 0x3\n"
-        if x[0] == "printa":
+        elif x[0] == "printc":
+            compilied += "mov @a " + str(variableValue(variables, x[1])) + "\nint 0x3\n"
+        elif x[0] == "printa":
             compilied += "int 0x4\n"
+        elif x[0] == "char":
+            variables[x[1]] = len(variables) + 1
+            ramLoc = variables[x[1]]
+            compilied += "mov $" + str(ramLoc) + " " + str(chartable.index(x[2]) + 1) + "\n"
     return compilied
