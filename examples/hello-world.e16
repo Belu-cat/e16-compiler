@@ -1,0 +1,23 @@
+func _main {
+    char text h;
+    printc text;
+    char text e;
+    printc text;
+    char text l;
+    printc text;
+    printc text;
+    char text o;
+    printc text;
+    printc 70;
+    char text w;
+    printc text;
+    char text o;
+    printc text;
+    char text r;
+    printc text;
+    char text l;
+    printc text;
+    char text d;
+    printc text;
+    printa;
+}

@@ -1,0 +1,32 @@
+mov $1 9
+mov @a $1
+int 0x3
+mov $2 6
+mov @a $2
+int 0x3
+mov $2 13
+mov @a $2
+int 0x3
+mov @a $2
+int 0x3
+mov $2 16
+mov @a $2
+int 0x3
+mov @a 70
+int 0x3
+mov $2 24
+mov @a $2
+int 0x3
+mov $2 16
+mov @a $2
+int 0x3
+mov $2 19
+mov @a $2
+int 0x3
+mov $2 13
+mov @a $2
+int 0x3
+mov $2 5
+mov @a $2
+int 0x3
+int 0x4
