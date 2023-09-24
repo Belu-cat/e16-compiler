@@ -1,4 +1,4 @@
-exeptions = ["(", ")", "'", '"', "=", ";"]
+exeptions = ["(", ")", "'", '"', "=", ";", "{", "}"]
 keywords = ["int", "=", "func", "printc", "printa"]
 
 def lexer(text):
