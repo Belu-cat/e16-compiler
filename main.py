@@ -1,6 +1,4 @@
 import lexerparser as lexer
-lexed = lexer.lexer("func _main { int hello = 12; };")
+lexed = lexer.lexer("func _main { int hello = 12; int hello2 = 34; };")
 print(lexed)
 print(lexer.parser(lexed))
-print(lexer.exeptions)
-print(lexer.keywords)

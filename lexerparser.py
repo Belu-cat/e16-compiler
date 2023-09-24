@@ -95,10 +95,32 @@ def parser(lexer):
         if temp1 & temp2:
             funcName = tokens[i + 1]
             parsedTokens[funcName] = []
-            i += 2
-            print(i)
+            i += 3
             while tokens[i] != "}":
-                parsedTokens[funcName].append(tokens[i])
+                temp1 = tokens[i] != "="
+                # temp2 = types[i] != "keyword"
+                if temp1:
+                    parsedTokens[funcName].append(tokens[i])
                 i += 1
         i += 1
+    i = 0
+    countedFunction = []
+    newFunction = []
+    # while i != len(parsedTokens["_main"]):
+    #     temp1 = tokens[i] == ";"
+    #     temp2 = types[i] == "endLine"
+    #     if temp1 & temp2:
+    #         newFunction.append(countedFunction)
+    #         countedFunction = []
+    #     else:
+    #         countedFunction.append(parsedTokens["_main"][i])
+    #     i += 1
+    # parsedTokens["_main"] = newFunction
+    for x in parsedTokens["_main"]:
+        if x == ";":
+            newFunction.append(countedFunction)
+            countedFunction = []
+        else:
+            countedFunction.append(x)
+    parsedTokens["_main"] = newFunction
     return parsedTokens
