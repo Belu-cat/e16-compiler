@@ -1,5 +1,9 @@
 import lexerparser as lexer
-lexed = lexer.lexer("func _main { printc 2; printa; };")
+f = open("input.e16")
+# lexed = lexer.lexer("func _main { printc 2; printa; };")
+input = f.read()
+lexed = lexer.lexer(input.replace("\n", ""))
+f.close()
 print(lexed)
 parsed = lexer.parser(lexed)
 print(parsed)

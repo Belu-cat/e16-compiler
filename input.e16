@@ -1,0 +1,4 @@
+func _main { 
+printc 2;
+printa: 
+};

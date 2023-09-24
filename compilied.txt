@@ -1,3 +1,2 @@
 mov @a 2
 int 0x3
-int 0x4
