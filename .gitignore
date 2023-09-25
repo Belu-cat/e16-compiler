@@ -160,4 +160,5 @@ cython_debug/
 #.idea/
 
 #not from template
-compile.bat
+e16compile.sh
+e16compile.bat
