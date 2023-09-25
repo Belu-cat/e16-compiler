@@ -153,7 +153,7 @@ def numericalOp(input, variables):
     if op != "":
         command = op + " " + str(variableValue(variables, split[0])) + " " + str(variableValue(variables, split[1]))
     else:
-        command = ""
+        command = input
     return command
 
 def compile(parsed):
