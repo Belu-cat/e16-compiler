@@ -162,3 +162,5 @@ cython_debug/
 #not from template
 e16compile.sh
 e16compile.bat
+sudo.txt
+compilied.txt

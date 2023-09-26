@@ -1,5 +1,8 @@
 func _main {
     char hello b;
     printc hello;
+    if hello = hello {
+        printc hello;
+    }
     printa;
 };
