@@ -204,6 +204,12 @@ def numericalOp(input, variables):
         command = input
     return command
 
+def floatingToFixed(floating=1.2):
+    fixedInter = str(floating).split(".")
+    fixedInter[0] = bin(int(fixedInter[0]))[2:]
+    fixedInter[1] = bin(int(fixedInter[1]))[2:]
+    return "0b" + str(fixedInter[0]).zfill(8) + fixedInter[1].zfill(8)
+
 def compile(parsed):
     parsedTokens = parsed
     variables = {}
@@ -229,4 +235,8 @@ def compile(parsed):
             variables[x[1]] = len(variables) + 1
             ramLoc = variables[x[1]]
             compilied += "mov $" + str(ramLoc) + " " + str(chartable.index(x[2]) + 1) + "\n"
+        elif x[0] == "fixed":
+            variables[x[1]] = len(variables) + 1
+            ramLoc = variables[x[1]]
+            compilied += "mov $" + str(ramLoc) + " " + str(floatingToFixed(float(x[2]))) + "\n"
     return compilied

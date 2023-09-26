@@ -4,5 +4,6 @@ func _main {
     if hello = hello {
         printc hello;
     };
+    fixed hello3 5.5;
     printa;
 };
