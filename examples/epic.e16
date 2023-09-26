@@ -3,6 +3,6 @@ func _main {
     printc hello;
     if hello = hello {
         printc hello;
-    }
+    };
     printa;
 };
